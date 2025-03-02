@@ -231,10 +231,8 @@ namespace GUI {
         GUI::DrawItemf(1, "持久化 ID:", "%u", displayInfo? info.persistentID : 0);
         GUI::DrawItemf(2, "可转移 ID 凭据:", "%llu", displayInfo? info.transferableIdBase : 0);
         GUI::DrawItemf(3, "主 ID:", "%u", displayInfo? info.principalID : 0);
-        // The following are not functioning 
-        // GUI::DrawItem(4, "Account ID:", info.accountId);
-        // GUI::DrawItem(5, "Country:", displayInfo? info.countryName : "");
-        // GUI::DrawItem(6, "NFS Password:", displayInfo? info.nfsPassword : "");
+        GUI::DrawItemf(4, "账号 ID:", "%s (%s)", info.accountId, info.status);
+        GUI::DrawItem(5, "地区:", displayInfo? info.countryName : "");
     }
 
     static void ConfigInfoPage(const ConfigInfo &info, bool &displayInfo) {
@@ -331,7 +329,7 @@ namespace GUI {
 
         u8 wifiStrength = osGetWifiStrength();
         GUI::DrawItemf(4, "WiFi 信号强度:", "%d (%.0lf%%)", wifiStrength, static_cast<float>(wifiStrength * 33.33));
-
+        
         char hostname[128];
         gethostname(hostname, sizeof(hostname));
         GUI::DrawItem(5, "IP:", displayInfo? hostname : "");
